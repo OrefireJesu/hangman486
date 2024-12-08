@@ -7,10 +7,10 @@ class Hangman:
         
         self.word_list = word_list
         self.num_lives = num_lives
-        self.word = random.choice(word_list).lower()  # Pick a random word
-        self.word_guessed = ['_'] * len(self.word)  # Initialize with underscores
-        self.num_letters = len(set(self.word))  # Count unique letters
-        self.list_of_guesses = []  # List to track guessed letters
+        self.word = random.choice(word_list).lower()
+        self.word_guessed = ['_'] * len(self.word) 
+        self.num_letters = len(set(self.word)) 
+        self.list_of_guesses = [] 
 
     def check_guess(self, guess):
         guess = guess.lower()
@@ -34,18 +34,21 @@ class Hangman:
             elif guess in self.list_of_guesses:
                 print("You already tried that letter!")
             else: 
-                print("TESTR")
                 self.check_guess(guess)
                 self.list_of_guesses.append(guess)
 
+    def play_game(self, word_list):
+        num_lives = 5
+        game = Hangman(word_list, num_lives)
+        while(True):
+            if num_lives == 0:
+                print('You lost!')
+            elif self.num_letters > 0:
+                self.ask_for_input()
+            else:
+                print('Congratulations. You won the game!')
+                
 
-# Testing the class
-if __name__ == "__main__":
-    word_list = ["apple", "banana", "cherry", "grape"]
-    game = Hangman(word_list)
-    game.ask_for_input()
-
-# word_list = ["apple", "banana", "cherry", "grape"]
-# game = Hangman(word_list)
-
-# game.ask_for_input()
+word_list = ["apple", "banana", "cherry", "grape"]
+game = Hangman(word_list)
+game.play_game(word_list)
